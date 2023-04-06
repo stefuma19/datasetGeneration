@@ -46,6 +46,22 @@ def generate_exponential(num_samples, dimensions):
 
 def generate_multivariate_normal(num_samples, mean, cov):
     X = np.random.multivariate_normal(mean, cov, size=num_samples)
+    # normalization process
+    dimensions = len(mean)
+    max = 0
+    min = 0
+    for i in range(0, dimensions):
+        for j in range(0, num_samples):
+            if X[j, i] < min:
+                min = X[j, i]
+        for j in range(0, num_samples):
+            X[j, i] = X[j, i] - min
+    for i in range(0, dimensions):
+        for j in range(0, num_samples):
+            if X[j, i] > max:
+                max = X[j, i]
+        for j in range(0, num_samples):
+            X[j, i] = X[j, i] / max
     print("Dataset with multivariate normal distribution: {}".format(X.shape))
     return X
 

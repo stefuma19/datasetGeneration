@@ -29,16 +29,16 @@ if __name__ == '__main__':
     elif method == 'exponential':
         dataset = datasetgen.generate_exponential(number_of_samples, dim)
     elif method == 'multivariate_normal':
-        mean = [1, 1, 1]
-        cov = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+        mean = [1, 1]
+        cov = [[1, 0], [0, 1]]
         dataset = datasetgen.generate_multivariate_normal(number_of_samples, mean=mean, cov=cov)
     elif method == 'cor_neg':
-        mean = [1, 1, 1]
-        cov = [[1, -0.5, -0.1], [-0.5, 1, -0.5], [-0.1, -0.5, 1]]
+        mean = [1, 1]
+        cov = [[1, -0.8], [-0.8, 1]]
         dataset = datasetgen.generate_multivariate_normal(number_of_samples, mean=mean, cov=cov)
     elif method == 'cor_pos':
-        mean = [1, 1, 1]
-        cov = [[1, 0.5, 0.1], [0.5, 1, 0.5], [0.1, 0.5, 1]]
+        mean = [1, 1]
+        cov = [[1, 0.8], [0.8, 1]]
         dataset = datasetgen.generate_multivariate_normal(number_of_samples, mean=mean, cov=cov)
 
     datasetgen.save_dataset_to_csv(dataset, output_filename)
