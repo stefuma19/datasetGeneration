@@ -40,6 +40,26 @@ if __name__ == '__main__':
         mean = [1, 1]
         cov = [[1, 0.8], [0.8, 1]]
         dataset = datasetgen.generate_multivariate_normal(number_of_samples, mean=mean, cov=cov)
+    elif method == 'test':
+        """mean = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        cov = [[1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+               [0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
+               [0, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0, 1, 0, 0, 0, 0],
+               [0, 0, 0, 0, 0, 0, 1, 0, 0, 0],
+               [0, 0, 0, 0, 0, 0, 0, 1, 0, 0],
+               [0, 0, 0, 0, 0, 0, 0, 0, 1, 0],
+               [0, 0, 0, 0, 0, 0, 0, 0, 0, 1]]"""
+        mean = [1, 1, 1, 1, 1]
+        cov = [[1, 0, 0, 0, 0],
+               [0, 1, 0, 0, 0],
+               [0, 0, 1, 0, 0],
+               [0, 0, 0, 1, 0],
+               [0, 0, 0, 0, 1]]
+
+        dataset = datasetgen.generate_multivariate_normal(number_of_samples, mean=mean, cov=cov)
 
     datasetgen.save_dataset_to_csv(dataset, output_filename)
     if compute_skyline == '1':

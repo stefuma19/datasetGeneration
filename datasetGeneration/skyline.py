@@ -42,6 +42,61 @@ class Point3D:
     def dominates(self, p):
         return self.x <= p.x and self.y <= p.y and self.z <= p.z
 
+class Point4D:
+    def __init__(self, id, x, y, z, w):
+        self.id = id
+        self.x = x
+        self.y = y
+        self.z = z
+        self.w = w
+
+    def log(self):
+        print_point = "Point {} with coordinates: ({}, {}, {}, {})".format(self.id, self.x, self.y, self.z, self.w)
+        return print_point
+
+    def dominates(self, p):
+        return self.x <= p.x and self.y <= p.y and self.z <= p.z and self.w <= p.w
+
+class Point5D:
+    def __init__(self, id, x1, x2, x3, x4, x5):
+        self.id = id
+        self.x1 = x1
+        self.x2 = x2
+        self.x3 = x3
+        self.x4 = x4
+        self.x5 = x5
+
+    def log(self):
+        print_point = "Point {} with coordinates: ({}, {}, {}, {}, {})".format(self.id, self.x1, self.x2, self.x3, self.x4, self.x5)
+        return print_point
+
+    def dominates(self, p):
+        return self.x1 <= p.x1 and self.x2 <= p.x2 and self.x3 <= p.x3 and self.x4 <= p.x4 and self.x5 <= p.x5
+
+
+class Point10D:
+    def __init__(self, id, x1, x2, x3, x4, x5, x6, x7, x8, x9, x10):
+        self.id = id
+        self.x1 = x1
+        self.x2 = x2
+        self.x3 = x3
+        self.x4 = x4
+        self.x5 = x5
+        self.x6 = x6
+        self.x7 = x7
+        self.x8 = x8
+        self.x9 = x9
+        self.x10 = x10
+
+
+    def log(self):
+        print_point = "Point {} with coordinates: ({}, {}, {}, {}, {}, {}, {}, {}, {}, {})".\
+            format(self.id, self.x1, self.x2, self.x3, self.x4, self.x5, self.x6, self.x7, self.x8, self.x9, self.x10)
+        return print_point
+
+    def dominates(self, p):
+        return self.x1 <= p.x1 and self.x2 <= p.x2 and self.x3 <= p.x3 and self.x4 <= p.x4 and self.x5 <= p.x5 and self.x6 <= p.x6 and self.x7 <= p.x7 and self.x8 <= p.x8 and self.x9 <= p.x9 and self.x10 <= p.x10
+
 
 def skyline_calculation(df):
     window = DataSet()
@@ -57,6 +112,17 @@ def skyline_calculation(df):
     elif d == 3:
         for i in range(n):
             data.add_point(Point3D(df.iloc[i].name, df.iloc[i][0], df.iloc[i][1], df.iloc[i][2]))
+    elif d == 4:
+        for i in range(n):
+            data.add_point(Point4D(df.iloc[i].name, df.iloc[i][0], df.iloc[i][1], df.iloc[i][2], df.iloc[i][3]))
+    elif d == 5:
+        for i in range(n):
+            data.add_point(Point5D(df.iloc[i].name, df.iloc[i][0], df.iloc[i][1], df.iloc[i][2], df.iloc[i][3], df.iloc[i][4]))
+    elif d == 10:
+        for i in range(n):
+            data.add_point(Point10D(df.iloc[i].name, df.iloc[i][0], df.iloc[i][1], df.iloc[i][2], df.iloc[i][3],
+                                   df.iloc[i][4], df.iloc[i][5], df.iloc[i][6], df.iloc[i][7],
+                                   df.iloc[i][8], df.iloc[i][9]))
 
     dominanceComparisons = 0
 
@@ -127,4 +193,38 @@ def create_and_save_skyline(output_filename):
                 d[fieldnames[1]] = skyp.x
                 d[fieldnames[2]] = skyp.y
                 d[fieldnames[3]] = skyp.z
+                writer.writerow(d)
+
+        if dim == 4:
+            for skyp in skyline.points:
+                d[fieldnames[0]] = skyp.id
+                d[fieldnames[1]] = skyp.x
+                d[fieldnames[2]] = skyp.y
+                d[fieldnames[3]] = skyp.z
+                d[fieldnames[4]] = skyp.w
+                writer.writerow(d)
+
+        if dim == 5:
+            for skyp in skyline.points:
+                d[fieldnames[0]] = skyp.id
+                d[fieldnames[1]] = skyp.x1
+                d[fieldnames[2]] = skyp.x2
+                d[fieldnames[3]] = skyp.x3
+                d[fieldnames[4]] = skyp.x4
+                d[fieldnames[5]] = skyp.x5
+                writer.writerow(d)
+
+        if dim == 10:
+            for skyp in skyline.points:
+                d[fieldnames[0]] = skyp.id
+                d[fieldnames[1]] = skyp.x1
+                d[fieldnames[2]] = skyp.x2
+                d[fieldnames[3]] = skyp.x3
+                d[fieldnames[4]] = skyp.x4
+                d[fieldnames[5]] = skyp.x5
+                d[fieldnames[6]] = skyp.x6
+                d[fieldnames[7]] = skyp.x7
+                d[fieldnames[8]] = skyp.x8
+                d[fieldnames[9]] = skyp.x9
+                d[fieldnames[10]] = skyp.x10
                 writer.writerow(d)
